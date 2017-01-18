@@ -1,0 +1,7 @@
+# resolver: lts-7.15
+resolver: lts-6.27
+
+packages:
+- 'x'
+
+dump-logs: all

@@ -1,0 +1,22 @@
+name:                x
+version:             0.1.0.0
+synopsis:            Initial project template from stack
+description:         Please see README.md
+homepage:            https://github.com/robinp/test#readme
+license:             BSD3
+license-file:        LICENSE
+author:              Robin Palotai
+maintainer:          palotai.robin@gmail.com
+copyright:           2017 Robin Palotai
+category:            Web
+build-type:          Simple
+cabal-version:       >=1.10
+
+library
+  hs-source-dirs:      src
+  exposed-modules:     Lib
+  build-depends:       base >= 4.7 && < 5
+                     , leveldb-haskell
+                     , neat-interpolation
+                     , text-format
+  default-language:    Haskell2010
