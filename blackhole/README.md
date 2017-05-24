@@ -1,10 +1,10 @@
-=== Compiler & OS
+### Compiler & OS
 
 GHC 7.10.3, 8.0.1, 8.0.2 (didn't check others).
 
 Linux: 4.10.13-1-ARCH #1 SMP PREEMPT x86_64 GNU/Linux 4-core
 
-=== What does the code do?
+### What does the code do?
 
 TLDR endlessly forks a batch of 8 threads, and waits for them to finish. Each
 thread calls `observeDuration` on an irrelevant IO action. `observeDuration`
@@ -14,13 +14,13 @@ measures the time, then updates some data structures in `STM` context in a
 After a short while (usually within 1 minute), the program aborts with
 `<<loop>>`. See below for a more detailed investigation.
 
-=== To run
+### To run
 
-  stack install
-  # Restart if doesn't terminate in a minute.
-  loop-exe +RTS -N4 -Ds > debug 2> debug.out ; beep
+    stack install
+    # Restart if doesn't terminate in a minute.
+    loop-exe +RTS -N4 -Ds > debug 2> debug.out ; beep
 
-=== Observe
+### Observe
 
 `debug` shows the metering batches run for a while, then get stuck.
 
@@ -33,7 +33,7 @@ blackhole.
 In the current log there is mentioning of blackholes, but also MVars, and I
 don't see what's going on.
 
-=== Tracking down
+### Tracking down
 
 When built with profiling (remove `--eventlog --debug` from cabal file, then
 `stack clean` then `stack build --profile`), and running with `+RTS -N4 -xc`
@@ -153,7 +153,7 @@ chain, but it didn't have much effect.
 I checked `insert` and `compress` and they don't seem to be able to loop in
 any edge case, so this bug is likely an RTS thing.
 
-=== Related tickets I found:
+### Related tickets I found:
 
 https://ghc.haskell.org/trac/ghc/ticket/10218
 		GHC creates incorrect code which throws <<loop>>
